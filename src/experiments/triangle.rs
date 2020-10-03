@@ -37,18 +37,18 @@ pub fn run() -> Result<(), String> {
     debug_assert_eq!(gl_attributes.context_version(), (3, 3));
 
     let vert_shader = render_utilities::Shader::from_vert_source(
-                        &CString::new(include_str!("triangle.vert")).unwrap()).unwrap();
+        &CString::new(include_str!("triangle.vert")).unwrap()).unwrap();
 
     let frag_shader = render_utilities::Shader::from_frag_source(
-                        &CString::new(include_str!("triangle.frag")).unwrap()).unwrap();
+        &CString::new(include_str!("triangle.frag")).unwrap()).unwrap();
 
     let shader_program = render_utilities::Program::from_shaders(&[vert_shader, frag_shader]).unwrap();
 
-    let vertices: Vec<f32> = vec! [
+    let vertices: Vec<f32> = vec![
         // positions        // color
-         0.5, -0.5,  0.0,   1.0, 0.0, 0.0,   // bottom right
-        -0.5, -0.5,  0.0,   0.0, 1.0, 0.0,   // bottom left
-         0.0,  0.5,  0.0,   0.0, 0.0, 1.0,   // top
+        0.5, -0.5, 0.0, 1.0, 0.0, 0.0,   // bottom right
+        -0.5, -0.5, 0.0, 0.0, 1.0, 0.0,   // bottom left
+        0.0, 0.5, 0.0, 0.0, 0.0, 1.0,   // top
     ];
 
     let mut vbo: gl::types::GLuint = 0;
@@ -99,12 +99,12 @@ pub fn run() -> Result<(), String> {
         gl::BindVertexArray(0);
     }
 
-    let mut event_pump = sdl_context.event_pump().map_err(|e|e.to_string())?;
+    let mut event_pump = sdl_context.event_pump().map_err(|e| e.to_string())?;
     'main: loop {
         for event in event_pump.poll_iter() {
             match event {
                 Event::Quit { .. } |
-                Event::KeyDown { keycode: Some(Keycode::Escape), ..} => break 'main,
+                Event::KeyDown { keycode: Some(Keycode::Escape), .. } => break 'main,
                 _ => {}
             }
         }
@@ -134,4 +134,3 @@ pub fn run() -> Result<(), String> {
 
     Ok(())
 }
-
